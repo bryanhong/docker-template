@@ -77,13 +77,13 @@ source vars
 docker build -t "${REPO_NAME}/${APP_NAME}:${TAG}" .
 if [ $? -eq 0 ]; then
   echo
-  echo "Build of $REPO_NAME/$APP_NAME:$TAG completed OK"
+  echo "Build of ${REPO_NAME}/${APP_NAME}:${TAG} completed OK"
   echo
   echo
   if [ -f builds ] ; then
-    sed -i "1i`date` => $REPO_NAME/$APP_NAME:$TAG" builds
+    sed -i "1i`date` => ${REPO_NAME}/${APP_NAME}:${TAG}" builds
   else
-    echo "`date` => $REPO_NAME/$APP_NAME:$TAG" > builds
+    echo "`date` => ${REPO_NAME}/${APP_NAME}:${TAG}" > builds
   fi
 else
   echo "Build failed!"
@@ -256,7 +256,7 @@ cat << 'EOF' >> README.md
 
 ###Commands and variables
 
-* ```vars```: Variables for the application and repository location are stored here
+* ```vars```: Variables for the application and registry/repository username/location are stored here
 * ```build.sh```: Build the Docker image locally for testing
 * ```run.sh```: Starts the Docker container, it the image hasn't been built locally, it is fetched from the repository set in vars
 * ```push.sh```: Pushes the latest locally built image to the repository set in vars
@@ -280,7 +280,7 @@ cat << 'EOF' >> README.md
 
 ####Push image to the repository
 
-If you're happy with your container and ready to share with others, push your image up to the local Docker repository and check in any other changes you've made in this Git repository so the image can be easily changed or rebuilt in the future.
+If you're happy with your container and ready to share with others, push your image up to a Docker registry and check in any other changes you've made in this Git repository so the image can be easily changed or rebuilt in the future.
 
 1. Run ```./push.sh```
 
