@@ -75,19 +75,21 @@ cat << 'EOF' > build.sh
 source vars
 
 docker build -t "${REPO_NAME}/${APP_NAME}:${TAG}" .
+
+# If the build was successful (0 exit code)...
 if [ $? -eq 0 ]; then
   echo
   echo "Build of ${REPO_NAME}/${APP_NAME}:${TAG} completed OK"
   echo
-  echo
-  if [ -f builds ] ; then
-    sed -i "1i`date` => ${REPO_NAME}/${APP_NAME}:${TAG}" builds
-  else
-    echo "`date` => ${REPO_NAME}/${APP_NAME}:${TAG}" > builds
-  fi
+
+  # log build details to builds file
+  echo "`date` => ${REPO_NAME}/${APP_NAME}:${TAG}" >> builds
+
+# The build exited with an error.
 else
   echo "Build failed!"
   exit 1
+
 fi
 EOF
 fi
@@ -131,7 +133,7 @@ source vars
 if [[ ! -f builds ]]; then
   LATESTIMAGE=${REPO_NAME}/${APP_NAME}:latest
 else
-  LATESTIMAGE=`head -1 builds | awk '{print $8}'`
+  LATESTIMAGE=`tail -1 builds | awk '{print $8}'`
 fi
 echo
 echo "Starting $APP_NAME..."
@@ -168,7 +170,7 @@ if [[ ! -f builds ]]; then
   exit 1
 fi
 
-LATESTIMAGE=`head -1 builds | awk '{print $8}'`
+LATESTIMAGE=`tail -1 builds | awk '{print $8}'`
 
 # Flatten is here as an option and not the default because with the export/import
 # process we lose Dockerfile attributes like PORT and VOLUMES. Flattening helps if
