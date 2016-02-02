@@ -2,15 +2,15 @@
 
 Generate boilerplate scripts for jumpstarting Docker container development
 
-###Requirements / Dependencies
+##Requirements / Dependencies
 
 * Docker 1.6 or higher, we are using the Docker syslog driver in this container and this feature made its debut in 1.6
 
-###Commands and variables
+##Commands and variables
 
 * ```generate_ubuntu.sh```: Generate build/run/push scripts and a basic Dockerfile for Ubuntu-based container
 
-###Usage
+##Usage
 
 If you plan on tracking your container development in a version control system, create a repository first and then fetch generate_ubuntu.sh (might add more distros in the future..) to the root of your repository:
 
@@ -20,7 +20,7 @@ wget https://raw.githubusercontent.com/bryanhong/docker-template/master/generate
 chmod 755 generate_ubuntu.sh
 ```
 
-####Configure and run generate_ubuntu.sh
+###Configure and run generate_ubuntu.sh
 
 1. There are 4 basic variables at the top of ```generate_ubuntu.sh```, change those to suit your needs, save your changes.
 2. If there is a README.md file in your repository that is essentially blank, delete it, ```generate_ubuntu.sh``` will create one for you that has the basics to get you started in documenting your container.
@@ -41,11 +41,11 @@ chmod 755 generate_ubuntu.sh
 └── vars
 ```
 
-####On your own
+###On your own
 
 At this point you can modify things to suit your needs, supervisor is included in the Dockerfile so you can build this image, run a container based on that image, and get a shell on it to try things out. 
 
-####Supervisor
+###Supervisor
 
 Here's an example supervisor config file if you wanted to run apache:
 
@@ -66,16 +66,16 @@ RUN apt-get -y install apache2
 ADD assets/supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
 ```
 
-####Build the image
+###Build the image
 
 1. Run ```./build.sh```
 
-####Start the container
+###Start the container
 
 1. If you need to expose ports on the Docker host, you'll need to make changes to ```run.sh``` first, examples are provided.
 2. Run ```./run.sh```
 
-####Push image to the repository
+###Push image to the repository
 
 If you're happy with your container and ready to share with others, push your image up to the local Docker repository and check in any other changes you've made in this Git repository so the image can be easily changed or rebuilt in the future.
 
