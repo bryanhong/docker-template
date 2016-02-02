@@ -282,7 +282,7 @@ cat << 'EOF' >> README.md
 
 ###Pushing your image to the registry
 
-If you're happy with your container and ready to share with others, push your image up to a Docker registry and backup or save changes you've made so the image can be easily changed or rebuilt in the future.
+If you're happy with your container and ready to share with others, push your image up to a [Docker registry](https://docs.docker.com/docker-hub/) and backup or save changes you've made so the image can be easily changed or rebuilt in the future.
 
 1. Run ```./push.sh```
 
