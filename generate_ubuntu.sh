@@ -280,9 +280,9 @@ cat << 'EOF' >> README.md
 
 1. Run ```./run.sh```
 
-###Push image to the repository
+###Pushing your image to the registry
 
-If you're happy with your container and ready to share with others, push your image up to a Docker registry and check in any other changes you've made in this Git repository so the image can be easily changed or rebuilt in the future.
+If you're happy with your container and ready to share with others, push your image up to a Docker registry and backup or save changes you've made so the image can be easily changed or rebuilt in the future.
 
 1. Run ```./push.sh```
 
