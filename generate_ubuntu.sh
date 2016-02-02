@@ -251,12 +251,12 @@ cat << 'EOF' >> README.md
 
 [//]: # (A brief description of the container here)
 
-###Requirements / Dependencies
+##Requirements / Dependencies
 
 * Docker 1.6 or higher, we are using the Docker syslog driver in this container and this feature made its debut in 1.6
 * ```vars``` needs to be populated with the appropriate variables.
 
-###Commands and variables
+##Commands and variables
 
 * ```vars```: Variables for the application and registry/repository username/location are stored here
 * ```build.sh```: Build the Docker image locally for testing
@@ -264,23 +264,23 @@ cat << 'EOF' >> README.md
 * ```push.sh```: Pushes the latest locally built image to the repository set in vars
 * ```shell.sh```: get a shell within the container
 
-###Usage
+##Usage
 
 [//]: # (Provide details of what this container does and how it should be deployed and managed)
 
-####Configure the container
+###Configure the container
 
 1. Configure application specific variables in ```vars```
 
-####Build the image
+###Build the image
 
 1. Run ```./build.sh```
 
-####Start the container
+###Start the container
 
 1. Run ```./run.sh```
 
-####Push image to the repository
+###Push image to the repository
 
 If you're happy with your container and ready to share with others, push your image up to a Docker registry and check in any other changes you've made in this Git repository so the image can be easily changed or rebuilt in the future.
 
