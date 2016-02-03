@@ -284,7 +284,9 @@ cat << 'EOF' >> README.md
 
 If you're happy with your container and ready to share with others, push your image up to a [Docker registry](https://docs.docker.com/docker-hub/) and backup or save changes you've made so the image can be easily changed or rebuilt in the future.
 
-1. Run ```./push.sh```
+1. Authenticate to the Docker Registry ```docker login```
+2. Run ```./push.sh```
+3. Log into your Docker hub account and add a description, etc.
 
 > NOTE: If your image will be used FROM other containers you might want to use ```./push.sh flatten``` to consolidate the AUFS layers into a single layer. Keep in mind, you may lose Dockerfile attributes when your image is flattened.
 EOF
