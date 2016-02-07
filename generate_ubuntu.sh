@@ -41,15 +41,15 @@ if [[ ! -f vars ]]; then
 cat << EOF > vars
 #!/bin/bash
 
-#### BEGIN APP SPECIFIC VARIABLES
+#### BEGIN DOCKER RUN VARIABLES
 
 APP_NAME=${APP_NAME}
 REPO_NAME="${REPO_NAME}"
 
-#### END APP SPECIFIC VARIABLES
+#### END DOCKER RUN VARIABLES
 EOF
 cat << 'EOF' >> vars
-#### BEGIN GENERIC VARIABLES
+#### BEGIN FRAMEWORK VARIABLES
   
 # Get an SHA sum of all files involved in building the image so the image can be tagged
 # this will provide assurance that any image with the same tag was built the same way. 
@@ -62,7 +62,7 @@ SHASUM=`find . -type f \
   
 TAG="`date +%Y%m%d`-${SHASUM}"
 
-#### END GENERIC VARIABLES
+#### END FRAMEWORK VARIABLES
 EOF
 fi
 #### END VARS HEREDOC
@@ -139,12 +139,12 @@ echo
 echo "Starting $APP_NAME..."
 echo
 echo -n "Container ID: "
-docker run \
---detach=true \
---log-driver=syslog \
---name="${APP_NAME}" \
---restart=always \
-${LATESTIMAGE}
+docker run             \
+  --detach=true        \
+  --log-driver=syslog  \
+  --name="${APP_NAME}" \
+  --restart=always     \
+  ${LATESTIMAGE}
 # Other useful options
 # -p DOCKERHOST_PORT:CONTAINER_PORT \
 # -e "ENVIRONMENT_VARIABLE_NAME=VALUE" \
