@@ -245,44 +245,107 @@ fi
 #### BEGIN README.MD HEREDOC
 if [[ ! -f README.md ]]; then
 cat << EOF > README.md
-#${APP_NAME} in Docker
+docker-${APP_NAME}
+==
 EOF
 cat << 'EOF' >> README.md
 
-[//]: # (A brief description of the container here)
+brief description of container
 
-##Requirements / Dependencies
+>description of software used in the container [project website](http://URLofproject.com)
 
-* Docker 1.6 or higher, we are using the Docker syslog driver in this container and this feature made its debut in 1.6
-* ```vars``` needs to be populated with the appropriate variables.
+Quickstart
+--
 
-##Commands and variables
+The following command will run mycontainer, if you want to customize or build the container locally, skip to [Building the Container](#building-the-container) below
 
-* ```vars```: Variables for the application and registry/repository username/location are stored here
-* ```build.sh```: Build the Docker image locally for testing
+```
+docker run                                               \
+  --detach=true                                          \
+  --log-driver=syslog                                    \
+  --name="mycontainer"                                   \
+  --restart=always                                       \
+  --env VARIABLE_NAME=value                              \
+  --publish 80:80                                        \
+  dockerhubusername/mycontainer:latest
+```
+
+### Runtime flags explained
+
+```
+--detach=true
+```  
+run the container in the background  
+```
+--log-driver=syslog
+```  
+send logs to syslog on the Docker host  (requires Docker 1.6 or higher)  
+```
+--name="mycontainer"
+```  
+name of the container  
+```
+--restart=always
+```  
+automatically start the container when the Docker daemon starts  
+```
+--env VARIABLE_NAME=value
+```  
+a key/value that are available inside the container  
+```
+--publish 80:80
+```  
+Docker host port : mapped port in the container
+
+Additional Steps
+--
+1. Additional info if applicable
+
+Building the container
+--
+
+If you want to make modifications to the image or simply see how things work, check out this repository:
+
+```
+git clone https://github.com/username/docker-mycontainer.git
+```
+
+### Commands and variables
+
+* ```vars```: Variables for Docker registry, the application, and aptly repository data location
+* ```build.sh```: Build the Docker image locally
 * ```run.sh```: Starts the Docker container, it the image hasn't been built locally, it is fetched from the repository set in vars
 * ```push.sh```: Pushes the latest locally built image to the repository set in vars
 * ```shell.sh```: get a shell within the container
 
-##Usage
+### How this image/container works
 
-[//]: # (Provide details of what this container does and how it should be deployed and managed)
+**Data**  
 
-###Configure the container
+
+**Networking**  
+
+
+**Security**  
+
+
+### Usage
+
+#### Configure the container
 
 1. Configure application specific variables in ```vars```
 
-###Build the image
+#### Build the image
 
 1. Run ```./build.sh```
 
-###Start the container
+#### Start the container
 
 1. Run ```./run.sh```
+ 
+#### Pushing your image to the registry
 
-###Pushing your image to the registry
-
-If you're happy with your container and ready to share with others, push your image up to a [Docker registry](https://docs.docker.com/docker-hub/) and backup or save changes you've made so the image can be easily changed or rebuilt in the future.
+If you're happy with your container and ready to share with others, push your image up to a [Docker registry](https://docs.docker.com/docker-hub/) and save any other changes you've made so the image can be easily changed or rebuilt in the future.
 
 1. Authenticate to the Docker Registry ```docker login```
 2. Run ```./push.sh```
