@@ -192,7 +192,7 @@ case "$1" in
       echo "The ${APP_NAME} container doesn't appear to exist, exiting"
       exit 1
     fi
-    RUNNING=`docker inspect ${APP_NAME} | python -c 'import sys, json; print json.load(sys.stdin)[0]["State"]["Running"]'`
+    RUNNING=`docker inspect ${APP_NAME} | python3 -c 'import sys, json; print(json.load(sys.stdin)[0]["State"]["Running"])'`
     if [[ "${RUNNING}" = "True" ]]; then
       echo "Stopping ${APP_NAME} container for export"
       docker stop ${APP_NAME}
@@ -223,7 +223,7 @@ if [[ $? -ne 0 ]]; then
   echo "The ${APP_NAME} container doesn't appear to exist, exiting"
 fi
 
-CONTAINER_ID=`docker inspect ${APP_NAME} | python -c 'import sys, json; print json.load(sys.stdin)[0]["Id"]'`
+CONTAINER_ID=`docker inspect ${APP_NAME} | python3 -c 'import sys, json; print(json.load(sys.stdin)[0]["Id"])'`
 
 docker exec -it ${CONTAINER_ID} /bin/bash
 EOF
